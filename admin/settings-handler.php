@@ -11,35 +11,33 @@ function wpc_register_settings() {
     register_setting('wpc_options_group', 'wpc_compare_page_title');
     register_setting('wpc_options_group', 'wpc_compare_table_title');
     register_setting('wpc_options_group', 'wpc_show_add_to_cart_button');
-    register_setting('wpc_options_group', 'wpc_show_page_title');  // برای تایتل صفحه
-    register_setting('wpc_options_group', 'wpc_show_table_title');  // برای تایتل جدول
+    register_setting('wpc_options_group', 'wpc_show_page_title');
+    register_setting('wpc_options_group', 'wpc_show_table_title');
+    
+    // Add settings for each product detail
+    register_setting('wpc_options_group', 'wpc_show_product_image');
+    register_setting('wpc_options_group', 'wpc_show_product_name');
+    register_setting('wpc_options_group', 'wpc_show_product_price');
+    register_setting('wpc_options_group', 'wpc_show_product_sale_price');
+    register_setting('wpc_options_group', 'wpc_show_product_rating');
+    register_setting('wpc_options_group', 'wpc_show_product_stock_status');
+    register_setting('wpc_options_group', 'wpc_show_product_attribute');
 
     // Registering fields
     add_settings_section('wpc_main_section', '', null, 'wpc-settings');
 
-    add_settings_field(
-        'wpc_compare_page_title',
-        'Compare Page Title',
-        'wpc_compare_page_title_callback',
-        'wpc-settings',
-        'wpc_main_section'
-    );
+    add_settings_field('wpc_compare_page_title', 'Compare Page Title', 'wpc_compare_page_title_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_compare_table_title', 'Compare Table Title', 'wpc_compare_table_title_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_add_to_cart_button', 'Show Add to Cart Button in Compare Page', 'wpc_show_add_to_cart_button_callback', 'wpc-settings', 'wpc_main_section');
 
-    add_settings_field(
-        'wpc_compare_table_title',
-        'Compare Table Title',
-        'wpc_compare_table_title_callback',
-        'wpc-settings',
-        'wpc_main_section'
-    );
-
-    add_settings_field(
-        'wpc_show_add_to_cart_button',
-        'Show Add to Cart Button in Compare Page',
-        'wpc_show_add_to_cart_button_callback',
-        'wpc-settings',
-        'wpc_main_section'
-    );
+    // Fields for product details visibility
+    add_settings_field('wpc_show_product_image', 'Show Product Image', 'wpc_show_product_image_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_product_name', 'Show Product Name', 'wpc_show_product_name_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_product_price', 'Show Product Price', 'wpc_show_product_price_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_product_sale_price', 'Show Product Sale Price', 'wpc_show_product_sale_price_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_product_rating', 'Show Product Rating', 'wpc_show_product_rating_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_product_stock_status', 'Show Product Stock Status', 'wpc_show_product_stock_status_callback', 'wpc-settings', 'wpc_main_section');
+    add_settings_field('wpc_show_product_attribute', 'Show Product Attribute', 'wpc_show_product_attribute_callback', 'wpc-settings', 'wpc_main_section');
 }
 
 // Callbacks
@@ -66,3 +64,39 @@ function wpc_show_add_to_cart_button_callback() {
     echo '<input type="checkbox" name="wpc_show_add_to_cart_button" value="yes"' . checked($checked, true, false) . ' />';
 }
 
+// Callbacks for product details visibility
+function wpc_show_product_image_callback() {
+    $checked = get_option('wpc_show_product_image', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_image" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+function wpc_show_product_name_callback() {
+    $checked = get_option('wpc_show_product_name', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_name" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+function wpc_show_product_price_callback() {
+    $checked = get_option('wpc_show_product_price', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_price" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+function wpc_show_product_sale_price_callback() {
+    $checked = get_option('wpc_show_product_sale_price', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_sale_price" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+function wpc_show_product_rating_callback() {
+    $checked = get_option('wpc_show_product_rating', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_rating" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+function wpc_show_product_stock_status_callback() {
+    $checked = get_option('wpc_show_product_stock_status', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_stock_status" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+function wpc_show_product_attribute_callback() {
+    $checked = get_option('wpc_show_product_attribute', 'yes') === 'yes';
+    echo '<input type="checkbox" name="wpc_show_product_attribute" value="yes"' . checked($checked, true, false) . ' />';
+}
+?>
