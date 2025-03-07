@@ -10,7 +10,7 @@ function wpc_render_compare_page() {
     $show_add_to_cart = get_option('wpc_show_add_to_cart_button', 'yes') === 'yes';
     
     if (get_option('wpc_show_page_title', 'yes') === 'yes') {
-        echo '<h2>' . esc_html($page_title) . '</h2>';
+        echo '<h2 style="font-size: 24px;">' . esc_html($page_title) . '</h2>';
     }
     
     if (empty($compare_list)) {
@@ -19,7 +19,7 @@ function wpc_render_compare_page() {
     }
     
     if (get_option('wpc_show_table_title', 'yes') === 'yes') {
-        echo '<h3>' . esc_html($table_title) . '</h3>';
+        echo '<h3 style="font-size: 20px;">' . esc_html($table_title) . '</h3>';
     }
 
     // Get the product image size option
@@ -28,7 +28,8 @@ function wpc_render_compare_page() {
     $image_height = get_option('wpc_product_image_height', '150');
     
     // Start container for the grid layout
-    echo '<div class="compare-grid">';
+    echo '<div class="compare-table-product">';
+    echo '<div class="wpc-compare-grid">';
 
     foreach ($compare_list as $product_id) {
         $product = wc_get_product($product_id);
@@ -94,16 +95,17 @@ function wpc_render_compare_page() {
         // Remove Button
         echo '<button class="wpc-remove-product button" data-product-id="' . esc_attr($product_id) . '">x</button>';
         echo '</div>'; // Close product-info container
-        if (get_option('wpc_show_product_attribute', 'yes') === 'yes') {
-            // Product Attributes Container
-            echo '<div class="product-attributes">';
-            echo '<h4>Attributes:</h4>';
-            echo wpc_get_product_attributes_html($product_id);
-            echo '</div>'; // Close product-attributes container
-        }
         echo '</div>'; // Close individual product container
     }
+    echo '</div>'; // Close wpc-compare-grid container
+    if (get_option('wpc_show_product_attribute', 'yes') === 'yes') {
+        // Product Attributes Container
+        echo '<div class="product-attributes">';
+        echo '<h4>مشخصات کلی</h4>';
+        echo wpc_get_product_attributes_html($compare_list);
+        echo '</div>'; // Close product-attributes container
+    }
 
-    echo '</div>'; // Close compare-grid container
+    echo '</div>'; // Close wpc-compare-grid container
 }
 ?>

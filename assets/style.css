@@ -32,9 +32,10 @@
     font-weight: bold;
 }
 
-.compare-grid {
+.wpc-compare-grid {
     display: grid;
     grid-template-columns: 1fr 1fr; 
+    padding-right: 0;
 }
 .compare-item {
     display: flex;
@@ -52,8 +53,8 @@
     position: relative;
 }
 
-.compare-item:first-child .product-info {
-    border-left: 1px solid #dddddd69;
+.compare-item:not(:first-child) .product-info {
+    border-right: 1px solid #dddddd69;
 }
 
 .product-info h5 {
@@ -67,6 +68,7 @@
     border-radius: 12px;
     height: 40px;
     font-size: 12px;
+    border: 0;
 }
 
 .wpc-product-price .regular-price.woocommerce-Price-amount {
@@ -76,10 +78,44 @@
     font-size: 12px;
 }
 
+/* Attributes */
+
 .product-attributes {
     /* background-color: #f2f2f2; */
     padding: 15px;
     border-radius: 5px;
+}
+
+.product-attributes > h4 {
+    font-size : 15px;
+    font-weight : 400;
+}
+
+.product-attributes .compare-attributes-list  .compare-attribute-group {
+    border-bottom: 1px solid #dddddd69;
+    padding-top: 20px;
+}
+
+.product-attributes .compare-attributes-list  .compare-attribute-group > .attribute-title {
+    font-size : 14px;
+    color : #81858b;
+    font-weight: 300;
+}
+
+.product-attributes .compare-attributes-list  .compare-attribute-group li {
+    list-style: none;
+    padding: 16px 0 20px 0;
+}
+
+.product-attributes .compare-attributes-list .compare-attribute-group li span {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 0;
+}
+
+.product-attributes .compare-attributes-list .compare-attribute-group li:not(:first-child) span {
+    border-right: 1px solid #dddddd69;
+    padding-right: 8px;
 }
 
 .product-image {
@@ -103,6 +139,7 @@ button.wpc-remove-product {
     position: absolute;
     top: 8px;
     left: 24px;
+    border: 0;
 }
 
 
