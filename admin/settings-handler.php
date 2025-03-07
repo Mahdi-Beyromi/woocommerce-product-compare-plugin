@@ -13,6 +13,9 @@ function wpc_register_settings() {
     register_setting('wpc_options_group', 'wpc_show_add_to_cart_button');
     register_setting('wpc_options_group', 'wpc_show_page_title');
     register_setting('wpc_options_group', 'wpc_show_table_title');
+    // register_setting('wpc_options_group', 'wpc_product_image_size');
+    register_setting('wpc_options_group', 'wpc_product_image_width');
+    register_setting('wpc_options_group', 'wpc_product_image_height');
     
     // Add settings for each product detail
     register_setting('wpc_options_group', 'wpc_show_product_image');
@@ -29,6 +32,9 @@ function wpc_register_settings() {
     add_settings_field('wpc_compare_page_title', 'Compare Page Title', 'wpc_compare_page_title_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_compare_table_title', 'Compare Table Title', 'wpc_compare_table_title_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_show_add_to_cart_button', 'Show Add to Cart Button in Compare Page', 'wpc_show_add_to_cart_button_callback', 'wpc-settings', 'wpc_main_section');
+    // add_settings_field('wpc_product_image_size','Product Image Size','wpc_product_image_size_callback','wpc-settings','wpc_main_section');
+    add_settings_field('wpc_product_image_width','Product Image Width (px)','wpc_product_image_width_callback','wpc-settings','wpc_main_section');   
+    add_settings_field('wpc_product_image_height','Product Image Height (px)','wpc_product_image_height_callback','wpc-settings','wpc_main_section');
 
     // Fields for product details visibility
     add_settings_field('wpc_show_product_image', 'Show Product Image', 'wpc_show_product_image_callback', 'wpc-settings', 'wpc_main_section');
@@ -62,6 +68,26 @@ function wpc_compare_table_title_callback() {
 function wpc_show_add_to_cart_button_callback() {
     $checked = get_option('wpc_show_add_to_cart_button', 'yes') === 'yes';
     echo '<input type="checkbox" name="wpc_show_add_to_cart_button" value="yes"' . checked($checked, true, false) . ' />';
+}
+
+// function wpc_product_image_size_callback() {
+//     $value = get_option('wpc_product_image_size', 'thumbnail');  // مقدار پیش‌فرض "thumbnail"
+//     echo '<select name="wpc_product_image_size">
+//             <option value="thumbnail"' . selected($value, 'thumbnail', false) . '>Thumbnail</option>
+//             <option value="medium"' . selected($value, 'medium', false) . '>Medium</option>
+//             <option value="large"' . selected($value, 'large', false) . '>Large</option>
+//             <option value="full"' . selected($value, 'full', false) . '>Full Size</option>
+//           </select>';
+// }
+
+function wpc_product_image_width_callback() {
+    $value = get_option('wpc_product_image_width', '150'); 
+    echo '<input type="number" name="wpc_product_image_width" value="' . esc_attr($value) . '" class="wpc-input" /> px';
+}
+
+function wpc_product_image_height_callback() {
+    $value = get_option('wpc_product_image_height', '150'); 
+    echo '<input type="number" name="wpc_product_image_height" value="' . esc_attr($value) . '" class="wpc-input" /> px';
 }
 
 // Callbacks for product details visibility

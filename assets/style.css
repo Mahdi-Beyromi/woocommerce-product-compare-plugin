@@ -67,9 +67,9 @@
 }
 
 .product-image {
-    width: 150px;
+    /* width: 150px;
     height: 150px;
-    object-fit: cover;
+    object-fit: cover; */
     margin-bottom: 15px;
 }
 

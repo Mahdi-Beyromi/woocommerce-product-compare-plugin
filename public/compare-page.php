@@ -21,6 +21,11 @@ function wpc_render_compare_page() {
     if (get_option('wpc_show_table_title', 'yes') === 'yes') {
         echo '<h3>' . esc_html($table_title) . '</h3>';
     }
+
+    // Get the product image size option
+    $image_size = get_option('wpc_product_image_size', 'thumbnail');  // Default to 'thumbnail'
+    $image_width = get_option('wpc_product_image_width', '150');
+    $image_height = get_option('wpc_product_image_height', '150');
     
     // Start container for the grid layout
     echo '<div class="compare-grid">';
@@ -37,8 +42,8 @@ function wpc_render_compare_page() {
         
         // Product Image
         if (get_option('wpc_show_product_image', 'yes') === 'yes') {
-            $product_image = $product->get_image(); // Get product image
-            echo '<div class="product-image">' . $product_image . '</div>';
+            $product_image = $product->get_image('full');  // Get product image with selected size
+            echo '<div class="product-image" style="width:' . esc_attr($image_width) . 'px; height:' . esc_attr($image_height) . 'px;">' . $product_image . '</div>';
         }
 
         // Product Name
