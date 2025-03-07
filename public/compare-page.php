@@ -5,13 +5,22 @@ if (!defined('ABSPATH')) exit;
 function wpc_render_compare_page() {
     $compare_list = isset($_SESSION['wpc_compare_list']) ? $_SESSION['wpc_compare_list'] : [];
 
-    echo '<h2>Product Compare</h2>';
-
+    $page_title = get_option('wpc_compare_page_title', 'Product Comparison');
+    $table_title = get_option('wpc_compare_table_title', 'Comparison Table');
+    
+    if (get_option('wpc_show_page_title', 'yes') === 'yes') {
+        echo '<h2>' . esc_html($page_title) . '</h2>';
+    }
+    
     if (empty($compare_list)) {
         echo '<p>No products in compare list.</p>';
         return;
     }
-
+    
+    if (get_option('wpc_show_table_title', 'yes') === 'yes') {
+        echo '<h3>' . esc_html($table_title) . '</h3>';
+    }
+    
     // Start container for the grid layout
     echo '<div class="compare-grid">';
 

@@ -1,20 +1,23 @@
 <?php
-// Add a settings page for the plugin
-add_action( 'admin_menu', 'wpc_add_settings_page' );
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+add_action('admin_menu', 'wpc_add_settings_page');
 
 function wpc_add_settings_page() {
     add_menu_page(
-        'WooCommerce Product Compare', 
-        'Product Compare', 
-        'manage_options', 
-        'wpc-settings', 
-        'wpc_settings_page_html', 
-        'dashicons-randomize', 
+        'WooCommerce Product Compare',
+        'Product Compare',
+        'manage_options',
+        'wpc-settings',
+        'wpc_settings_page_html',
+        'dashicons-randomize',
         30
     );
 }
 
-// Display settings page
 function wpc_settings_page_html() {
     ?>
     <div class="wrap">
@@ -29,4 +32,3 @@ function wpc_settings_page_html() {
     </div>
     <?php
 }
-?>

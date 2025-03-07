@@ -1,17 +1,34 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 add_action('admin_init', 'wpc_register_settings');
 
 function wpc_register_settings() {
+    // Register settings for both titles and their show options
     register_setting('wpc_options_group', 'wpc_compare_page_title');
+    register_setting('wpc_options_group', 'wpc_compare_table_title');
     register_setting('wpc_options_group', 'wpc_show_add_to_cart_button');
+    register_setting('wpc_options_group', 'wpc_show_page_title');  // برای تایتل صفحه
+    register_setting('wpc_options_group', 'wpc_show_table_title');  // برای تایتل جدول
 
+    // Registering fields
     add_settings_section('wpc_main_section', '', null, 'wpc-settings');
 
     add_settings_field(
         'wpc_compare_page_title',
         'Compare Page Title',
         'wpc_compare_page_title_callback',
+        'wpc-settings',
+        'wpc_main_section'
+    );
+
+    add_settings_field(
+        'wpc_compare_table_title',
+        'Compare Table Title',
+        'wpc_compare_table_title_callback',
         'wpc-settings',
         'wpc_main_section'
     );
@@ -25,12 +42,27 @@ function wpc_register_settings() {
     );
 }
 
+// Callbacks
 function wpc_compare_page_title_callback() {
     $value = get_option('wpc_compare_page_title', 'Product Comparison');
-    echo '<input type="text" name="wpc_compare_page_title" value="' . esc_attr($value) . '" />';
+    echo '<div class="wpc-input-container">
+            <input type="text" name="wpc_compare_page_title" value="' . esc_attr($value) . '" class="wpc-input" />
+            <label for="wpc_show_page_title" class="wpc-checkbox-label">Show</label>
+            <input type="checkbox" name="wpc_show_page_title" value="yes"' . checked(get_option('wpc_show_page_title', 'yes'), 'yes', false) . ' class="wpc-checkbox" />
+          </div>';
+}
+
+function wpc_compare_table_title_callback() {
+    $value = get_option('wpc_compare_table_title', 'Comparison Table');
+    echo '<div class="wpc-input-container">
+            <input type="text" name="wpc_compare_table_title" value="' . esc_attr($value) . '" class="wpc-input" />
+            <label for="wpc_show_table_title" class="wpc-checkbox-label">Show</label>
+            <input type="checkbox" name="wpc_show_table_title" value="yes"' . checked(get_option('wpc_show_table_title', 'yes'), 'yes', false) . ' class="wpc-checkbox" />
+          </div>';
 }
 
 function wpc_show_add_to_cart_button_callback() {
     $checked = get_option('wpc_show_add_to_cart_button', 'yes') === 'yes';
     echo '<input type="checkbox" name="wpc_show_add_to_cart_button" value="yes"' . checked($checked, true, false) . ' />';
 }
+

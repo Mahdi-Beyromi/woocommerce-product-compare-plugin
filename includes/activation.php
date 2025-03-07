@@ -6,10 +6,12 @@ function wpc_create_compare_page() {
     $page_slug = 'wpc-compare';
     $page_title = 'Product Compare';
 
+    $page_title = get_option('wpc_compare_page_title', $default_title);
+
     // Check if the page already exists
     $existing_page = get_page_by_path($page_slug);
     if ($existing_page) {
-        return; // Page already exists, do nothing
+        return;
     }
 
     // Create the page
@@ -25,3 +27,22 @@ function wpc_create_compare_page() {
         update_option('wpc_compare_page_id', $page_id);
     }
 }
+
+add_action('updated_option', 'wpc_update_compare_page_title', 10, 3);
+
+function wpc_update_compare_page_title($option, $old_value, $new_value) {
+    if ($option !== 'wpc_compare_page_title') {
+        return;
+    }
+
+    $page_id = get_option('wpc_compare_page_id');
+    if (!$page_id) {
+        return;
+    }
+
+    wp_update_post([
+        'ID'         => $page_id,
+        'post_title' => $new_value
+    ]);
+}
+

@@ -122,3 +122,26 @@ button.wpc-remove-product:hover {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+
+
+/* Admin Setting */
+.wpc-input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.wpc-input {
+    width: 200px; 
+    margin-right: 10px; 
+}
+
+.wpc-checkbox {
+    margin-left: 10px; 
+}
+
+.wpc-checkbox-label {
+    margin-right: 5px; 
+}
