@@ -38,24 +38,24 @@ function wpc_render_compare_page() {
             echo '<p><strong>Rating: </strong>' . esc_html($average_rating) . ' / 5</p>';
         }
 
-        // Check if product is in stock
+        $show_add_to_cart = get_option('wpc_show_add_to_cart_button', 'yes') === 'yes';
+
         if ($product->is_in_stock()) {
-            // Product Price (Sale Price if available)
             $sale_price = $product->get_sale_price();
             $regular_price = $product->get_regular_price();
-            
-            // If there is a sale price, show the regular price with a strikethrough
+        
             if ($sale_price) {
                 echo '<p><strong>Price: </strong><span class="regular-price" style="text-decoration: line-through;">' . wc_price($regular_price) . '</span> ' . wc_price($sale_price) . '</p>';
             } else {
-                // If no sale price, show the regular price
                 echo '<p><strong>Price: </strong>' . wc_price($regular_price) . '</p>';
             }
-            // Add to Cart Button (new)
-            echo '<form class="add-to-cart-form" method="post" action="' . esc_url( WC()->cart->get_cart_url() ) . '">
-                    <input type="hidden" name="add-to-cart" value="' . esc_attr($product_id) . '" />
-                    <button type="submit" class="add-to-cart-button button">Add to Cart</button>
-                </form>';
+        
+            if ($show_add_to_cart) {
+                echo '<form class="add-to-cart-form" method="post" action="' . esc_url(WC()->cart->get_cart_url()) . '">
+                        <input type="hidden" name="add-to-cart" value="' . esc_attr($product_id) . '" />
+                        <button type="submit" class="add-to-cart-button button">Add to Cart</button>
+                    </form>';
+            }
         } else {
             // If the product is out of stock, display "Out of Stock"
             echo '<p><strong>Availability: </strong>Out of Stock</p>';

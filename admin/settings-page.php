@@ -21,16 +21,10 @@ function wpc_settings_page_html() {
         <h1>Product Compare Settings</h1>
         <form method="post" action="options.php">
             <?php
-            settings_fields( 'wpc_options_group' );
-            do_settings_sections( 'wpc-settings' );
+            settings_fields('wpc_options_group');
+            do_settings_sections('wpc-settings');
+            submit_button();
             ?>
-            <table class="form-table">
-                <tr valign="top">
-                    <th scope="row">Compare Page Title</th>
-                    <td><input type="text" name="wpc_compare_page_title" value="<?php echo esc_attr( get_option( 'wpc_compare_page_title', 'Product Comparison' ) ); ?>" /></td>
-                </tr>
-            </table>
-            <?php submit_button(); ?>
         </form>
     </div>
     <?php
