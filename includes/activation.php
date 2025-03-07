@@ -3,7 +3,7 @@
 if ( !defined('ABSPATH') ) exit;
 
 function wpc_create_compare_page() {
-    $page_slug = 'compare';
+    $page_slug = 'wpc-compare';
     $page_title = 'Product Compare';
 
     // Check if the page already exists

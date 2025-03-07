@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success) {
-                    alert('Product added to compare list!');
+                    $('#wpc-compare-notification').addClass('show');
                 } else {
                     alert('Failed: ' + response.data);
                 }
@@ -21,5 +21,13 @@ jQuery(document).ready(function($) {
                 alert('AJAX request failed!');
             }
         });
+    });
+
+    $('#wpc-go-to-compare').on('click', function() {
+        window.location.href = woocommerce_compare.compare_page_url;
+    });
+
+    $('#wpc-dismiss-notification').on('click', function() {
+        $('#wpc-compare-notification').removeClass('show');
     });
 });

@@ -18,6 +18,7 @@ function wpc_enqueue_scripts() {
 
     wp_localize_script('wpc-compare-js', 'woocommerce_compare', array(
         'ajax_url' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('wpc_compare_nonce')
+        'nonce' => wp_create_nonce('wpc_compare_nonce'),
+        'compare_page_url' => home_url('/wpc-compare/')
     ));
 }
