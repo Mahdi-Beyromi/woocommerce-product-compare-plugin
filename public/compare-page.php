@@ -51,16 +51,19 @@ function wpc_render_compare_page() {
                 // If no sale price, show the regular price
                 echo '<p><strong>Price: </strong>' . wc_price($regular_price) . '</p>';
             }
+            // Add to Cart Button (new)
+            echo '<form class="add-to-cart-form" method="post" action="' . esc_url( WC()->cart->get_cart_url() ) . '">
+                    <input type="hidden" name="add-to-cart" value="' . esc_attr($product_id) . '" />
+                    <button type="submit" class="add-to-cart-button button">Add to Cart</button>
+                </form>';
         } else {
             // If the product is out of stock, display "Out of Stock"
             echo '<p><strong>Availability: </strong>Out of Stock</p>';
         }
 
         // Remove Button
-        echo '<button class="wpc-remove-product" data-product-id="' . esc_attr($product_id) . '">x</button>';
-
+        echo '<button class="wpc-remove-product button" data-product-id="' . esc_attr($product_id) . '">x</button>';
         echo '</div>'; // Close product-info container
-
         // Product Attributes Container
         echo '<div class="product-attributes">';
         echo '<h4>Attributes:</h4>';
@@ -72,5 +75,4 @@ function wpc_render_compare_page() {
 
     echo '</div>'; // Close compare-grid container
 }
-
 ?>

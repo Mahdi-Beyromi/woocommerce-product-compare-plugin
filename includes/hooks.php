@@ -11,7 +11,7 @@ function wpc_add_compare_button() {
     }
     
     // Compare button HTML
-    echo '<button class="compare-button" data-product-id="' . $product->get_id() . '">Add to Compare</button>';
+    echo '<button class="compare-button button" data-product-id="' . $product->get_id() . '">Add to Compare</button>';
 
     echo '<div id="wpc-compare-notification">
         Product added to compare list!<br><br>

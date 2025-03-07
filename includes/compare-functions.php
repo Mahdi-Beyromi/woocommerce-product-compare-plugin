@@ -40,3 +40,23 @@ function wpc_remove_from_compare() {
 }
 add_action('wp_ajax_remove_from_compare', 'wpc_remove_from_compare');
 add_action('wp_ajax_nopriv_remove_from_compare', 'wpc_remove_from_compare');
+
+
+// Handle AJAX request to add product to cart
+function wpc_add_product_to_cart() {
+    if (isset($_POST['product_id'])) {
+        $product_id = intval($_POST['product_id']);
+        
+        // Add product to cart
+        WC()->cart->add_to_cart($product_id);
+
+        // Return success response
+        wp_send_json_success(array(
+            'message' => 'Product added to cart!',
+            'cart_count' => WC()->cart->get_cart_contents_count()
+        ));
+    }
+    wp_send_json_error(array('message' => 'Failed to add product to cart.'));
+}
+add_action('wp_ajax_wpc_add_to_cart', 'wpc_add_product_to_cart');
+add_action('wp_ajax_nopriv_wpc_add_to_cart', 'wpc_add_product_to_cart');
