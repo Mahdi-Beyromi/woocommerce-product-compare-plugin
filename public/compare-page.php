@@ -13,20 +13,22 @@ function wpc_render_compare_page() {
     }
 
     echo '<table class="compare-table">';
-    echo '<tr><th>Product</th><th>Price</th><th>Attributes</th></tr>';
+    echo '<tr><th>Product</th><th>Price</th><th>Attributes</th><th>Action</th></tr>';
 
     foreach ($compare_list as $product_id) {
         $product = wc_get_product($product_id);
         if (!$product) continue;
 
-        echo '<tr>';
+        echo '<tr data-product-id="' . esc_attr($product_id) . '">';
         echo '<td>' . esc_html($product->get_name()) . '</td>';
         echo '<td>' . wc_price($product->get_price()) . '</td>';
         echo '<td>' . wpc_get_product_attributes_html($product_id) . '</td>';
+        echo '<td><button class="wpc-remove-product" data-product-id="' . esc_attr($product_id) . '">Remove</button></td>';
         echo '</tr>';
     }
 
     echo '</table>';
 }
+
 
 ?>
