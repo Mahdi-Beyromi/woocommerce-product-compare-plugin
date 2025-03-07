@@ -55,38 +55,40 @@ function wpc_render_compare_page() {
         if (get_option('wpc_show_product_rating', 'yes') === 'yes') {
             $average_rating = $product->get_average_rating();
             if ($average_rating) {
-                echo '<p><strong>Rating: </strong>' . esc_html($average_rating) . ' / 5</p>';
-            }
-        }
-
-        // Price
-        if (get_option('wpc_show_product_price', 'yes') === 'yes') {
-            $regular_price = $product->get_regular_price();
-            echo '<p><strong>Price: </strong>' . wc_price($regular_price) . '</p>';
-        }
-
-        // Sale Price
-        if (get_option('wpc_show_product_sale_price', 'yes') === 'yes') {
-            $sale_price = $product->get_sale_price();
-            if ($sale_price) {
-                echo '<p><strong>Sale Price: </strong>' . wc_price($sale_price) . '</p>';
+                echo '<p class="wpc-product-rating"> <span class="wpc-rating-star" style="color: #f5c518; margin-left:4px;">★</span>' . esc_html($average_rating) . '</p>';
             }
         }
 
         // Stock Status
         if (get_option('wpc_show_product_stock_status', 'yes') === 'yes') {
             if ($product->is_in_stock()) {
-                echo '<p><strong>Availability: </strong>In Stock</p>';
-            } else {
-                echo '<p><strong>Availability: </strong>Out of Stock</p>';
-            }
-        }
+                if (get_option('wpc_show_product_price', 'yes') === 'yes' || get_option('wpc_show_product_sale_price', 'yes') === 'yes') {
+                    $regular_price = $product->get_regular_price();
+                    $sale_price = $product->get_sale_price();
+                
+                    echo '<p class="wpc-product-price">';
+                
+                    if ($sale_price) {
+                        echo '<span class="regular-price woocommerce-Price-amount amount">' . wc_price($regular_price) . '</span>';
+                        echo '<span class="sale-price">' . wc_price($sale_price) . '</span>';
+                    } else {
+                        echo '<span class="regular-price">' . wc_price($regular_price) . '</span>';
+                    }
+                
+                    echo '</p>';
+                }
+                
 
-        if ($show_add_to_cart) {
-            echo '<form class="add-to-cart-form" method="post" action="' . esc_url(WC()->cart->get_cart_url()) . '">
-                    <input type="hidden" name="add-to-cart" value="' . esc_attr($product_id) . '" />
-                    <button type="submit" class="add-to-cart-button button">Add to Cart</button>
-                </form>';
+                if ($show_add_to_cart) {
+                    echo '<form class="add-to-cart-form" method="post" action="' . esc_url(WC()->cart->get_cart_url()) . '">
+                            <input type="hidden" name="add-to-cart" value="' . esc_attr($product_id) . '" />
+                            <button type="submit" class="add-to-cart-button button">افزودن به سبد</button>
+                        </form>';
+                }
+
+            } else {
+                echo '<p style="color: #81858b; ">ناموجود</p>';
+            }
         }
 
         // Remove Button

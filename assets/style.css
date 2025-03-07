@@ -46,7 +46,7 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    min-height: 370px;
+    min-height: 500px;
     padding: 12px;
     border-bottom: 1px solid #dddddd69;
     position: relative;
@@ -58,6 +58,22 @@
 
 .product-info h5 {
     font-weight : 400;
+    font-size: 16px;
+}
+
+.product-info .add-to-cart-form .add-to-cart-button {
+    background-color : #ef4056;
+    color : white;
+    border-radius: 12px;
+    height: 40px;
+    font-size: 12px;
+}
+
+.wpc-product-price .regular-price.woocommerce-Price-amount {
+    text-decoration: line-through;
+    margin-left: 8px;
+    color: #81858b;
+    font-size: 12px;
 }
 
 .product-attributes {
@@ -67,11 +83,11 @@
 }
 
 .product-image {
-    /* width: 150px;
-    height: 150px;
-    object-fit: cover; */
+    max-width: 500px;
+    max-height: 300px;
     margin-bottom: 15px;
 }
+
 
 button.wpc-remove-product {
     background-color: #d2d2d2;
@@ -86,11 +102,7 @@ button.wpc-remove-product {
     padding: 10px;
     position: absolute;
     top: 8px;
-    left: 24%;
-}
-
-button.wpc-remove-product:hover {
-    background-color: #ff0000;
+    left: 24px;
 }
 
 
