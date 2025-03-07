@@ -31,7 +31,6 @@ jQuery(document).ready(function($) {
         $('#wpc-compare-notification').removeClass('show');
     });
 
-
     $('.wpc-remove-product').on('click', function() {
         var productId = $(this).data('product-id');
 
@@ -45,10 +44,12 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success) {
-                    $('tr[data-product-id="' + productId + '"]').remove();
-                    if ($('.compare-table tr').length === 1) { // فقط هدری بمونه
-                        $('.compare-table').after('<p>No products in compare list.</p>');
-                        $('.compare-table').remove();
+                    // Remove the product from the compare list on the page immediately
+                    $('.compare-item[data-product-id="' + productId + '"]').remove();
+                    
+                    // If no products are left, show a message
+                    if ($('.compare-grid .compare-item').length === 0) {
+                        $('.compare-grid').html('<p>No products in compare list.</p>');
                     }
                 } else {
                     alert('Failed: ' + response.data);
