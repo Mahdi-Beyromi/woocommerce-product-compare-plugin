@@ -15,6 +15,9 @@ define( 'WPC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 require_once WPC_PLUGIN_DIR . 'includes/hooks.php';
 require_once WPC_PLUGIN_DIR . 'includes/helpers.php';
 require_once WPC_PLUGIN_DIR . 'includes/compare-functions.php';
+require_once WPC_PLUGIN_DIR . 'includes/activation.php';
+require_once WPC_PLUGIN_DIR . 'public/compare-page.php';
+register_activation_hook(__FILE__, 'wpc_create_compare_page');
 // require_once WPC_PLUGIN_DIR . 'public/enqueue-scripts.php';
 
 if ( is_admin() ) {
