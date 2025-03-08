@@ -41,6 +41,9 @@
     display: flex;
     flex-flow: column;
 }
+.compare-item > a {
+    text-decoration: none !important;
+}
 
 .product-info {
     display: flex;
@@ -57,9 +60,15 @@
     border-right: 1px solid #dddddd69;
 }
 
-.product-info h5 {
+.product-info h3 {
     font-weight : 400;
-    font-size: 16px;
+    font-size: 16px !important;
+}
+.product-info h3,
+.product-info .regular-price,
+.product-info .sale-price,
+.product-info .wpc-product-rating {
+    color: black;
 }
 
 .product-info .add-to-cart-form .add-to-cart-button {
@@ -193,4 +202,31 @@ button.wpc-remove-product {
 
 .wpc-checkbox-label {
     margin-right: 5px; 
+}
+
+
+@media only screen and (max-width: 1024px) {
+    .product-info {
+        min-height: 350px;
+    }
+    .product-image {
+        max-width: 300px;
+        max-height: 200px;
+    }
+
+    .product-info h3 {
+        font-size: 13px !important;
+    }
+
+    .product-attributes .compare-attributes-list  .compare-attribute-group > .attribute-title {
+        font-size : 13px;
+    }
+    .product-attributes .compare-attributes-list .compare-attribute-group li span {
+        font-size: 12px;
+    }
+
+    .product-attributes > h4 {
+        font-size : 13px;
+    }
+    
 }
