@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    $('.compare-button').on('click', function() {
+    $('.wpc-product-compare-button').on('click', function() {
         var productId = $(this).data('product-id');
         $('body').append('<div id="loading-overlay"><div id="loading-spinner"></div></div>');
 
@@ -14,6 +14,7 @@ jQuery(document).ready(function($) {
             success: function(response) {
                 if (response.success) {
                     $('#wpc-compare-notification').addClass('show');
+                    $('#wpc-compare-overlay').addClass('show');
                     $('#loading-overlay').remove();
                 } else {
                     alert('Failed: ' + response.data);
@@ -33,6 +34,8 @@ jQuery(document).ready(function($) {
 
     $('#wpc-dismiss-notification').on('click', function() {
         $('#wpc-compare-notification').removeClass('show');
+        $('#wpc-compare-overlay').removeClass('show');
+        
     });
 
     $('.wpc-remove-product').on('click', function() {

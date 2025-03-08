@@ -1,7 +1,7 @@
 <?php
 
-// Hook to display compare button on product pages
-add_action( 'woocommerce_after_single_product', 'wpc_add_compare_button', 20 );
+// Hook to display compare button after add to cart button
+add_action( 'woocommerce_after_add_to_cart_button', 'wpc_add_compare_button', 20 );
 
 function wpc_add_compare_button() {
     global $product;
@@ -10,16 +10,19 @@ function wpc_add_compare_button() {
         return;
     }
     
-    // Compare button HTML
-    echo '<button class="compare-button button" data-product-id="' . $product->get_id() . '">Add to Compare</button>';
+    // Compare button with icon HTML
+    echo '<a class="wpc-product-compare-button button" data-product-id="' . $product->get_id() . '">';
+    echo '<i class="fa fa-exchange-alt"></i>'; // Font Awesome icon
+    echo '</a>';
 
+    echo '<div id="wpc-compare-overlay"></div>';
     echo '<div id="wpc-compare-notification">
-        Product added to compare list!<br><br>
-        <button id="wpc-go-to-compare">Go to Compare Page</button>
-        <a href="javascript:void(0)" id="wpc-dismiss-notification">Dismiss</a>
+        <p>کالا به لیست مقایسه اضافه شد!</p><br>
+        <button id="wpc-go-to-compare">رفتن به صفحه مقایسه</button>
+        <a href="javascript:void(0)" id="wpc-dismiss-notification">بستن</a>
     </div>';
-
 }
+
 
 require_once WPC_PLUGIN_DIR . 'public/enqueue-scripts.php';
 
