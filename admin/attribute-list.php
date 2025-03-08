@@ -6,29 +6,25 @@ if (!defined('ABSPATH')) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['wpc_save_attributes'])) {
     $selected_attributes = isset($_POST['wpc_selected_attributes']) ? array_map('sanitize_text_field', $_POST['wpc_selected_attributes']) : [];
-    
+
     $selected_attributes = array_map(function ($attr) {
         return 'pa_' . $attr;
     }, $selected_attributes);
 
-    update_option('wpc_selected_attributes', $selected_attributes);
+    if (empty($selected_attributes)) {
+        delete_option('wpc_selected_attributes');
+    } else {
+        update_option('wpc_selected_attributes', $selected_attributes);
+    }
 }
 
 $saved_attributes = get_option('wpc_selected_attributes', []);
 
 $all_attributes = wc_get_attribute_taxonomies();
 
-if (empty($saved_attributes)) {
-    $saved_attributes = array_map(function ($attribute) {
-        return 'pa_' . $attribute->attribute_name;
-    }, $all_attributes);
-
-    update_option('wpc_selected_attributes', $saved_attributes);
-}
-
 ?>
 <div class="wrap">
-    <h1>Site Attribute</h1>
+    <h1>Attribute List </h1>
     <form method="post">
         <ul class="attribute-list">
             <?php

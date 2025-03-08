@@ -19,8 +19,8 @@ function wpc_add_settings_page() {
 
     add_submenu_page(
         'wpc-settings',
-        'Site Attribute',
-        'Site Attribute',
+        'Attribute List ',
+        'Attribute List ',
         'manage_options',
         'wpc-attribute-list',
         'wpc_attribute_list_page'

@@ -5,6 +5,16 @@ if (!defined('ABSPATH')) exit;
 function wpc_render_compare_page() {
     $compare_list = isset($_SESSION['wpc_compare_list']) ? $_SESSION['wpc_compare_list'] : [];
 
+    if (empty($compare_list)) {
+        $default_products = [354, 160]; 
+        foreach ($default_products as $product_id) {
+            if (!in_array($product_id, $compare_list)) {
+                $compare_list[] = $product_id;
+            }
+        }
+        $_SESSION['wpc_compare_list'] = $compare_list;
+    }
+
     $page_title = get_option('wpc_compare_page_title', 'Product Comparison');
     $table_title = get_option('wpc_compare_table_title', 'Comparison Table');
     $show_add_to_cart = get_option('wpc_show_add_to_cart_button', 'yes') === 'yes';

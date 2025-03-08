@@ -5,7 +5,19 @@
  * Version: 1.0
  * Author: Mahdi Beyromi
  * Text Domain: woocommerce-product-compare
+ * Requires at least: 5.0
+ * Tested up to: 6.0
+ * Requires PHP: 7.2
+ * WC requires at least: 3.0
+ * WC tested up to: 5.0
  */
+
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'wpc_add_settings_link' );
+function wpc_add_settings_link( $links ) {
+    $settings_link = '<a href="options-general.php?page=wpc-settings">Settings</a>';
+    array_push( $links, $settings_link );
+    return $links;
+}
 
 if ( !defined( 'ABSPATH' ) ) exit;
 
