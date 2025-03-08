@@ -16,6 +16,15 @@ function wpc_add_settings_page() {
         'dashicons-randomize',
         30
     );
+
+    add_submenu_page(
+        'wpc-settings',
+        'Site Attribute',
+        'Site Attribute',
+        'manage_options',
+        'wpc-attribute-list',
+        'wpc_attribute_list_page'
+    );
 }
 
 function wpc_settings_page_html() {
@@ -31,4 +40,8 @@ function wpc_settings_page_html() {
         </form>
     </div>
     <?php
+}
+
+function wpc_attribute_list_page() {
+    include_once plugin_dir_path(__FILE__) . 'attribute-list.php';
 }

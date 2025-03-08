@@ -21,7 +21,7 @@ function wpc_register_settings() {
     register_setting('wpc_options_group', 'wpc_show_product_image');
     register_setting('wpc_options_group', 'wpc_show_product_name');
     register_setting('wpc_options_group', 'wpc_show_product_price');
-    register_setting('wpc_options_group', 'wpc_show_product_sale_price');
+    // register_setting('wpc_options_group', 'wpc_show_product_sale_price');
     register_setting('wpc_options_group', 'wpc_show_product_rating');
     register_setting('wpc_options_group', 'wpc_show_product_stock_status');
     register_setting('wpc_options_group', 'wpc_show_product_attribute');
@@ -40,7 +40,7 @@ function wpc_register_settings() {
     add_settings_field('wpc_show_product_image', 'Show Product Image', 'wpc_show_product_image_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_show_product_name', 'Show Product Name', 'wpc_show_product_name_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_show_product_price', 'Show Product Price', 'wpc_show_product_price_callback', 'wpc-settings', 'wpc_main_section');
-    add_settings_field('wpc_show_product_sale_price', 'Show Product Sale Price', 'wpc_show_product_sale_price_callback', 'wpc-settings', 'wpc_main_section');
+    // add_settings_field('wpc_show_product_sale_price', 'Show Product Sale Price', 'wpc_show_product_sale_price_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_show_product_rating', 'Show Product Rating', 'wpc_show_product_rating_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_show_product_stock_status', 'Show Product Stock Status', 'wpc_show_product_stock_status_callback', 'wpc-settings', 'wpc_main_section');
     add_settings_field('wpc_show_product_attribute', 'Show Product Attribute', 'wpc_show_product_attribute_callback', 'wpc-settings', 'wpc_main_section');
@@ -106,10 +106,10 @@ function wpc_show_product_price_callback() {
     echo '<input type="checkbox" name="wpc_show_product_price" value="yes"' . checked($checked, true, false) . ' />';
 }
 
-function wpc_show_product_sale_price_callback() {
-    $checked = get_option('wpc_show_product_sale_price', 'yes') === 'yes';
-    echo '<input type="checkbox" name="wpc_show_product_sale_price" value="yes"' . checked($checked, true, false) . ' />';
-}
+// function wpc_show_product_sale_price_callback() {
+//     $checked = get_option('wpc_show_product_sale_price', 'yes') === 'yes';
+//     echo '<input type="checkbox" name="wpc_show_product_sale_price" value="yes"' . checked($checked, true, false) . ' />';
+// }
 
 function wpc_show_product_rating_callback() {
     $checked = get_option('wpc_show_product_rating', 'yes') === 'yes';

@@ -63,7 +63,7 @@ function wpc_render_compare_page() {
         // Stock Status
         if (get_option('wpc_show_product_stock_status', 'yes') === 'yes') {
             if ($product->is_in_stock()) {
-                if (get_option('wpc_show_product_price', 'yes') === 'yes' || get_option('wpc_show_product_sale_price', 'yes') === 'yes') {
+                if (get_option('wpc_show_product_price', 'yes') === 'yes') {
                     $regular_price = $product->get_regular_price();
                     $sale_price = $product->get_sale_price();
                 
@@ -108,4 +108,42 @@ function wpc_render_compare_page() {
 
     echo '</div>'; // Close wpc-compare-grid container
 }
+
+function wpc_get_product_attributes_html($compare_list) {
+    $saved_attributes = get_option('wpc_selected_attributes', []);
+    $all_attributes = wpc_get_all_attributes_for_compare($compare_list);
+
+    echo '<div class="compare-attributes-list">';
+
+    foreach ($all_attributes as $attr_name => $attr_label_raw) {
+        if (!in_array($attr_name, $saved_attributes)) {
+            continue;
+        }
+
+        $attr_label = urldecode($attr_label_raw);
+        $attr_label = html_entity_decode($attr_label, ENT_QUOTES, 'UTF-8');
+
+        echo '<div class="compare-attribute-group">';
+        echo '<strong class="attribute-title">' . esc_html($attr_label) . '</strong>';
+        echo '<ul class="attribute-values wpc-compare-grid">';
+
+        foreach ($compare_list as $product_id) {
+            $product = wc_get_product($product_id);
+            $attr_value = $product->get_attribute($attr_name);
+
+            $attr_value = urldecode($attr_value);
+            $attr_value = html_entity_decode($attr_value, ENT_QUOTES, 'UTF-8');
+
+            echo '<li class="attribute-value-item"><span>' . (!empty($attr_value) ? esc_html($attr_value) : '') . '</span></li>';
+        }
+
+        echo '</ul>';
+        echo '</div>';
+    }
+
+    echo '</div>';
+}
+
+
+
 ?>
